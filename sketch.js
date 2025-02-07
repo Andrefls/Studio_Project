@@ -1,4 +1,5 @@
-//ADDING AND MOVING PARTICLES (CONSTRUCTOR EXAMPLE FROM CLASS)
+// MODIFICATION IMG X AXIS AND PIXEL COLOURS INSTEAD OF TINT
+// CHANGED SONG
 
 var song;
 var vol;
@@ -15,60 +16,80 @@ var g = 50;
 var b = 100;
 var x = 0;
 var y = 0;
+var z = 0;
 var spectrum;
 
 function preload() {
-  song = loadSound('sound/cockatoo.mp3');
+  song = loadSound('sound/climbing.mp3');
   img = loadImage('images/frog.png');
 }
 
 function setup() {
-  createCanvas(600, 600);
+  createCanvas(1500, 1000);
 
-// setting up definitions to retrieve data
+  // setting up definitions to retrieve data
   amp = new p5.Amplitude();
   fft = new p5.FFT();
 
-// loop and play
+  // loop and play
   song.play();
   song.loop();
 
-// setting up new particles and movement
-  x = random(width);
-  y = random(height);
+  // setting up particles and movement
+  x = width / 2;
+  y = height / 2;
   for (var i = 0; i < 500; i++) {
     particles.push(new Particle());
   }
 }
 
 function draw() {
-  background(220);
-
-// Drawing the values I have retrieve from sound
+  background(0);
+  // Drawing the values I have retrieve from sound
   vol = amp.getLevel();
   spectrum = fft.analyze();
 
-// Drawing amplitude
+  // Drawing amplitude
   fill(255, 0, 0);
   noStroke();
   rect(10, 10, vol * 100, 20);
 
-// Drawing frequency
-// Creating an spectrum array that loo
 // Map the frequency spectrum to the color values
-r = map(spectrum[20], 0, 255, 235, 150);
-g = map(spectrum[50], 0, 255, 64, 234);
-b = map(spectrum[80], 0, 255, 80, 234);
+  r = map(spectrum[20], 0, 255, 235, 150);
+  g = map(spectrum[50], 0, 255, 64, 234);
+  b = map(spectrum[80], 0, 255, 80, 234);
+  
+  // Adding move to the frog image in Z coordinate
+  z = map(spectrum[100], 0, 255, 0, 2);
+  
+  // Drawing the frog
+  // Big change as I am retrieving pixel data and using the values from the sound to change the colour
 
-// Move the frog randomly
-  x = map(spectrum[50], 0, 255, 0, width - 50);
-  y = map(spectrum[100], 0, 255, 0, height - 50);
+  img.loadPixels();
+  for (var i = 0; i < img.pixels.length; i += 4) {
+    // Calculate the indices of the RGBA values
+    var rIndex = i;
+    var gIndex = i + 1;
+    var bIndex = i + 2;
+    var aIndex = i + 3;
 
-// Draw the frog
-  tint(r, g, b);
-  image(img, x, y, 50, 50);
+    // map the index to frequency
+    var freqIndex = floor(map(i, 0, img.pixels.length, 0, spectrum.length));
 
-// Draw particles
+    // Setting the values
+    img.pixels[rIndex] = map(spectrum[freqIndex % spectrum.length], 0, 255, 0, 255);
+    img.pixels[gIndex] = map(spectrum[(freqIndex + 10) % spectrum.length], 0, 255, 0, 255);
+    img.pixels[bIndex] = map(spectrum[(freqIndex + 20) % spectrum.length], 0, 255, 0, 255);
+  }
+  img.updatePixels();
+
+// Drawing the image and trying to change scale
+imageMode(CENTER);
+push();
+var offsetX = map(vol, 0, 1, -100, 100);
+image(img, width / 2 + offsetX, height / 2, img.width, img.height);
+pop();
+  // Draw particles
   for (var i = 0; i < particles.length; i++) {
     particles[i].update(spectrum);
     particles[i].display(spectrum);
@@ -87,8 +108,7 @@ function mousePressed() {
     background(0, 255, 0);
   }
 }
-
-// Creando constructor y definiendo particulas
+// Creating constructor and defining particles
 class Particle {
   constructor() {
     this.x = random(width);
