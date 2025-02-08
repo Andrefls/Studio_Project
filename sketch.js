@@ -1,6 +1,7 @@
-//REPLICATING AS I AM ADDING 5 NEW SOUND
-//Creating Variables
-// Creating conditionals
+// ADDING WARNING MESSAGE (WORKING)
+// Tweek
+// Creating New variables to start loop by conditionals
+// Creating New variables to start text by conditionals
 
 let song1, song2, song3, song4, song5;
 let vol;
@@ -13,9 +14,11 @@ let heartRate = 1;
 let inputBox;
 let submitButton;
 let currentSong;
+let showEmergencyMessage = false;
+let emergencyTimeout = null;
 
 function preload() {
-song1 = loadSound('sound/climbing.mp3');
+song1 = loadSound('sound/heartsound1.mp3');
 song2 = loadSound('sound/heartsound2.mp3');
 song3 = loadSound('sound/heartsound3.mp3');
 song4 = loadSound('sound/heartsound4.mp3');
@@ -25,18 +28,19 @@ img = loadImage('images/frog.png');
 
 function setup() {
 createCanvas(1500, 1000);
-//setting up definitions to retrieve data
+// setting up definitions to retrieve data
 amp = new p5.Amplitude();
 fft = new p5.FFT();
-//Setup up an array of particles here to be able to use it later
+// Array of particles
 for (var i = 0; i < 500; i++) {
 particles.push(new Particle());
 }
-// Setting input box as class example
+// Input box
 inputBox = createInput('');
 inputBox.position(650, 1010);
 inputBox.size(100, 30);
-// Setting up submit button as per class example
+
+// Submit button
 submitButton = createButton('Submit');
 submitButton.position(760, 1012);
 submitButton.size(100, 30);
@@ -59,6 +63,19 @@ if (started) {
 currentSong.stop();
 }
 started = true;
+if (heartRate < 60 || heartRate > 180) {
+showEmergencyMessage = true;
+if (emergencyTimeout !== null) {
+clearTimeout(emergencyTimeout);
+}
+emergencyTimeout = setTimeout(() => {
+window.location.reload();
+}, 2000);
+} else {
+showEmergencyMessage = false;
+if (emergencyTimeout !== null) {
+clearTimeout(emergencyTimeout);
+}
 if (heartRate >= 60 && heartRate < 75) {
 currentSong = song1;
 } else if (heartRate >= 75 && heartRate < 90) {
@@ -72,6 +89,7 @@ currentSong = song5;
 }
 currentSong.play();
 currentSong.loop();
+}
 for (var i = 0; i < particles.length; i++) {
 particles[i].x = random(width);
 particles[i].y = random(height);
@@ -84,36 +102,39 @@ particles[i].size = random(2, 5);
 
 function draw() {
 background(0);
-// Drawing the values I have retrieve from sound
-// Including conditionals
+// values for retrieving sound data
+// New conditionals
+// Modified Amplitud
 if (started) {
+if (showEmergencyMessage) {
+fill(255, 0, 0);
+textSize(32);
+text("Call Emergency", width / 2 - 150, height / 2);
+} else {
 vol = amp.getLevel();
 var spectrum = fft.analyze();
-// Drawing amplitude
 fill(255, 0, 0);
 noStroke();
 rect(10, 10, vol * 100, 20);
 img.loadPixels();
- 
-// Drawing frequency
-// Creating an spectrum array that loop
 for (var i = 0; i < img.pixels.length; i += 4) {
 var rIndex = i;
 var gIndex = i + 1;
 var bIndex = i + 2;
 var aIndex = i + 3;
-//The map() function converts a value from one range to another.
+//map() function converts a value from one range to another.
 var freqIndex = floor(map(i, 0, img.pixels.length, 0, spectrum.length));
-//This is how I map the frequency spectrum to Colour Values
+//map the frequency spectrum to Colour Values
 img.pixels[rIndex] = map(spectrum[freqIndex % spectrum.length], 0, 255, 0, 255);
 img.pixels[gIndex] = map(spectrum[(freqIndex + 10) % spectrum.length], 0, 255, 0, 255);
 img.pixels[bIndex] = map(spectrum[(freqIndex + 20) % spectrum.length], 0, 255, 0, 255);
 }
-img.updatePixels();
 // Draw particles and array loop (Using spectrum)
+img.updatePixels();
 for (var i = 0; i < particles.length; i++) {
 particles[i].update(spectrum);
 particles[i].display(spectrum, heartRate);
+}
 }
 // Draw the image and offsetting it on X, to create movement effect
 // Use Vol frequency for movement
@@ -130,8 +151,10 @@ textSize(32);
 text("Please type your hear rate value and click submit", width / 2 - 300, height / 2);
 }
 }
-// Creating constructor and defining particles
-// Using imput data (Spectrum and heart rate)
+
+// Constructor and particles
+// Imput data actioning changes (Spectrum and heart rate)
+
 class Particle {
 constructor() {
 this.x = random(width);
@@ -146,12 +169,12 @@ this.x += this.vx;
 this.y += this.vy;
 if (this.x < 0 || this.x > width) {
 this.vx *= -1;
-}
-if (this.y < 0 || this.y > height) {
-this.vy *= -1;
-}
-this.size = map(spectrum[floor(random(spectrum.length))], 0, 255, 2, 5);
-}
+ }
+ if (this.y < 0 || this.y > height) {
+ this.vy *= -1;
+ }
+ this.size = map(spectrum[floor(random(spectrum.length))], 0, 255, 2, 5);
+ }
   
 display(spectrum, heartRate) {
 fill(map(random(spectrum.length), 0, 255, 0, 255), map(random(spectrum.length), 0, 255, 0, 255), map(random(spectrum.length), 0, 255, 0, 255));
