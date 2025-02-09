@@ -5,7 +5,7 @@
 // need sound mix as desired
 
 // Variables are established
-let song1, song2, song3, song4, song5;
+let song1, song2, song3, song4, song5, song6, song7, song8;
 let vol;
 let amp;
 let fft;
@@ -28,6 +28,9 @@ song2 = loadSound('sound/heartsound2.mp3');
 song3 = loadSound('sound/heartsound3.mp3');
 song4 = loadSound('sound/heartsound4.mp3');
 song5 = loadSound('sound/heartsound5.mp3');
+song6 = loadSound('sound/heartsound6.mp3');
+song7 = loadSound('sound/heartsound7.mp3');
+song8 = loadSound('sound/heartsound8.mp3');
 img = loadImage('images/singer.png');
 img1 = loadImage('images/monster.png');
 img2 = loadImage('images/rightm.png');
@@ -79,16 +82,21 @@ if (emergencyTimeout !== null) {
 clearTimeout(emergencyTimeout);}
 if (heartRate >= 60 && heartRate < 75) {
 currentSong = song1;}
-else if (heartRate >= 75 && heartRate < 90) {
+else if (heartRate >= 76 && heartRate < 90) {
 currentSong = song2;} 
-else if (heartRate >= 90 && heartRate < 105) {
+else if (heartRate >= 91 && heartRate < 105) {
 currentSong = song3;}
-else if (heartRate >= 105 && heartRate < 120) {
+else if (heartRate >= 106 && heartRate < 120) {
 currentSong = song4;}
-else if (heartRate >= 120 && heartRate < 135) {
+else if (heartRate >= 121 && heartRate < 135) {
 currentSong = song5;}
-currentSong.play();
-currentSong.loop();}
+else if (heartRate >= 136 && heartRate < 150) {
+currentSong = song6;}
+else if (heartRate >= 151 && heartRate < 165) {
+currentSong = song7;}
+else if (heartRate >= 166 && heartRate < 180) {
+currentSong = song8;}
+currentSong.play();}
 for (var i = 0; i < particles.length; i++) {
 particles[i].x = random(width);
 particles[i].y = random(height);
@@ -98,41 +106,38 @@ particles[i].size = random(2, 5);}
 showText = false;});
 }
 
-// Drawing funtion established
+// Drawing function established
 function draw() {
 background(255);
-
-// showing text established and with a conditional working
+    
 if (showText) {
 fill(0);
 textSize(32);
 text("Please type your heart rate value and click submit", width / 2 - 300, height/2);}
 
-// Input box working and updating correctly
+// Input box and button
 inputBox.show();
 submitButton.show();
 
-//Conditional for only show emergency text
+//Emergency message
 if (showEmergencyMessage) {
 fill(255, 0, 0);
 textSize(32);
 text("Call Emergency", width / 2 - 150, height / 2);
-// Reset the angle
 angle = 0;
-// Stop the song
 if (currentSong) {
 currentSong.stop();}
-// Do not draw anything else
 return;}
 
-//Conditional for particles, and img4 working
+// Draw particles   
 if (started) {
-// Draw particles
-for (var i = 0; i < particles.length; i++) {
+if (currentSong && !currentSong.isPlaying()) {
+window.location.reload();} 
+else {for (var i = 0; i < particles.length; i++) {
 particles[i].update(fft.analyze());
 particles[i].display(fft.analyze(), heartRate);}
-
-// Draw img4 with rotation and animation working
+        
+// Draw img4 with rotation and animation
 imageMode(CENTER);
 push();
 translate(width / 2, height / 2);
@@ -140,19 +145,18 @@ rotate(radians(angle));
 var img4Size = map(amp, 0, 1, 50, 200);
 image(img4, 0, 0, img4Size, img4Size);
 pop();
-
+        
 // Draw other images
 image(img2, width / 2, height / 2, img1.width, img1.height);
 image(img3, width / 2, height / 2, img1.width, img1.height);
 image(img5, width / 2, height / 2, img1.width, img1.height);
-
-
-// Loop is being action if conditions are not met
+        
 vol = amp.getLevel();
 var spectrum = fft.analyze();
 fill(255, 0, 0);
 noStroke();
 rect(10, 10, vol * 100, 20);
+        
 //pixels representation
 img.loadPixels();
 for (var i = 0; i < img.pixels.length; i += 4) {
@@ -164,6 +168,7 @@ var freqIndex = floor(map(i, 0, img.pixels.length, 0, spectrum.length));
 img.pixels[rIndex] = map(spectrum[freqIndex % spectrum.length], 0, 255, 0, 255);
 img.pixels[gIndex] = map(spectrum[(freqIndex + 10) % spectrum.length], 0, 255, 0, 255);
 img.pixels[bIndex] = map(spectrum[(freqIndex + 20) % spectrum.length], 0, 255, 0, 255);}
+
 img.updatePixels();
 img1.loadPixels();
 
@@ -178,6 +183,8 @@ img1.pixels[gIndex] = map(spectrum[(freqIndex + 10) % spectrum.length], 0, 255, 
 img1.pixels[bIndex] = map(spectrum[(freqIndex + 20) % spectrum.length], 0, 255, 0, 255);}
 
 img1.updatePixels();
+
+// Moving the two singers
 imageMode(CENTER);
 push();
 var offsetX = map(vol, 0, 1, -10, 100);
@@ -186,10 +193,11 @@ image(img, width / 2 + offsetX, height / 2, img.width, img.height);
 image(img1, width / 2 + offsetX2 + 100, height / 2, img1.width, img1.height);
 pop();
 angle += 2;}}
+}
 
 // Constructor established and working
 class Particle {
- constructor() {
+constructor() {
 this.x = random(width);
 this.y = random(height);
 this.vx = random(-2, 2);
