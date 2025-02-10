@@ -31,12 +31,12 @@ song5 = loadSound('sound/heartsound5.mp3');
 song6 = loadSound('sound/heartsound6.mp3');
 song7 = loadSound('sound/heartsound7.mp3');
 song8 = loadSound('sound/heartsound8.mp3');
-img = loadImage('images/singer.png');
-img1 = loadImage('images/monster.png');
+img = loadImage('images/singer2.png');
+img1 = loadImage('images/monster2.png');
 img2 = loadImage('images/rightm.png');
 img3 = loadImage('images/leftm.png');
 img4 = loadImage('images/musicnotes.png');
-img5 = loadImage('images/floor.png');
+img5 = loadImage('images/floor2.png');
 }
 
 //function setup is established
@@ -108,10 +108,12 @@ showText = false;});
 
 // Drawing function established
 function draw() {
-background(255);
+background (0);
+
+
     
 if (showText) {
-fill(0);
+fill(255);
 textSize(32);
 text("Please type your heart rate value and click submit", width / 2 - 300, height/2);}
 
@@ -147,9 +149,9 @@ image(img4, 0, 0, img4Size, img4Size);
 pop();
         
 // Draw other images
+image(img5, width / 2, height / 2, img1.width, img1.height);
 image(img2, width / 2, height / 2, img1.width, img1.height);
 image(img3, width / 2, height / 2, img1.width, img1.height);
-image(img5, width / 2, height / 2, img1.width, img1.height);
         
 vol = amp.getLevel();
 var spectrum = fft.analyze();
@@ -159,7 +161,7 @@ rect(10, 10, vol * 100, 20);
         
 //pixels representation
 img.loadPixels();
-for (var i = 0; i < img.pixels.length; i += 4) {
+for (var i = 0; i < img.pixels.length; i += 15) {
 var rIndex = i;
 var gIndex = i + 1;
 var bIndex = i + 2;
@@ -172,7 +174,7 @@ img.pixels[bIndex] = map(spectrum[(freqIndex + 20) % spectrum.length], 0, 255, 0
 img.updatePixels();
 img1.loadPixels();
 
-for (var i = 0; i < img1.pixels.length; i += 4) {
+for (var i = 0; i < img1.pixels.length; i += 15) {
 var rIndex = i;
 var gIndex = i + 1;
 var bIndex = i + 2;
@@ -188,7 +190,7 @@ img1.updatePixels();
 imageMode(CENTER);
 push();
 var offsetX = map(vol, 0, 1, -10, 100);
-var offsetX2 = map (vol, 0, 1, -100, 100);
+var offsetX2 = map (vol, 0, 1, 50, 100);
 image(img, width / 2 + offsetX, height / 2, img.width, img.height);
 image(img1, width / 2 + offsetX2 + 100, height / 2, img1.width, img1.height);
 pop();
@@ -218,5 +220,5 @@ display(spectrum, heartRate) {
 fill(map(random(spectrum.length), 0, 255, 0, 255), map(random(spectrum.length), 0, 255, 0, 255),
 map(random(spectrum.length), 0, 255, 0, 255));
 noStroke();
-ellipse(this.x, this.y, this.size * heartRate /5);}
+ellipse(this.x, this.y, this.size * heartRate /20);}
 }
