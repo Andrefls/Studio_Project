@@ -238,7 +238,7 @@ for (let i = 0; i < img1Copies.length; i++) {
 img1Copies[i].scale += 0.6;
 if (img1Copies[i].scale >1.1) {
 img1Copies[i].scale = 1;}
-image(img1Copies[i].img, img1Copies[i].x+100, img1Copies[i].y, width * img1Copies[i].scale, height * img1Copies[i].scale);}
+image(img1Copies[i].img, img1Copies[i].x+150, img1Copies[i].y, width * img1Copies[i].scale, height * img1Copies[i].scale);}
 pop();
 }
 
