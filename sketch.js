@@ -21,7 +21,6 @@ let emergencyTimeout = null;
 let angle = 0;
 let showText = true;
 
-//OPTIONAL
 //Making duplicate of images and arrays to be able to store the position
 let imgCopies = [];
 let img1Copies = [];
@@ -46,9 +45,18 @@ img4 = loadImage('images/musicnotes.png');
 img5 = loadImage('images/floor2.png');
 }
 
+
+// Resize Size of screen
+function windowResized (){
+resizeCanvas (windowWidth, windowHeight);
+inputBox.position(width/2-100, height-80);
+inputBox.size(100, 20);
+submitButton.position(width/2+10, height-78);
+submitButton.size(100, 20);}
+
 //function setup is established
 function setup() {
-createCanvas(1500, 1000);
+createCanvas (windowWidth, windowHeight);
 
 // Particles array and data retrieval established
 amp = new p5.Amplitude();
@@ -58,16 +66,15 @@ particles.push(new Particle());}
 
 //Input box established
 inputBox = createInput('');
-inputBox.position(650, 1050);
-inputBox.size(100, 30);
+inputBox.position(width/2-100, height-80);
+inputBox.size(100, 20);
 
 //submitButton established
 submitButton = createButton('Submit');
-submitButton.position(760, 1052);
-submitButton.size(100, 30);
+submitButton.position(width/2+10, height-78);
+submitButton.size(100, 20);
 
 // mousepressed established
-// condtional of time, setTimeout, image to be selected, and moving particles established
 // sound playing as desired
 // conditional for text to dissapear established
 submitButton.mousePressed(() => {
@@ -79,6 +86,7 @@ currentSong.stop();}
 started = true;
 angle = 0;
 
+//Heart rate values and conditionals
 if (heartRate < 60 || heartRate > 180) {
 showEmergencyMessage = true;
 if (emergencyTimeout !== null) {
@@ -106,7 +114,7 @@ else if (heartRate >= 165 && heartRate < 180) {
 currentSong = song8;}
 currentSong.play();}
 
-
+//particles setup array and representation
 for (var i = 0; i < particles.length; i++) {
 particles[i].x = random(width);
 particles[i].y = random(height);
@@ -116,7 +124,7 @@ particles[i].size = random(2, 5);}
 showText = false;});
 }
 
-// Drawing function established
+// DRAW FUNCTION ESTABLISHED
 function draw() {
 
 //Interactive message
@@ -165,16 +173,16 @@ image(img4, 0, 0, img4Size, img4Size);
 pop();
 
 // Draw other images
-image(img5, width / 2, height / 2, img1.width, img1.height);
-image(img2, width / 2, height / 2, img1.width, img1.height);
-image(img3, width / 2, height / 2, img1.width, img1.height);
+image(img5, width / 2, height / 2, width, height);
+image(img2, width / 2, height / 2, width, height);
+image(img3, width / 2, height / 2, width, height);
 
 //Little rectangle to show the levels
 vol = amp.getLevel();
 var spectrum = fft.analyze();
 fill(255, 0, 0);
 noStroke();
-rect(10, 10, vol * 300, 20);
+rect(10, 10, vol * width/5, height/20);
         
 //pixels representation
 //img
@@ -208,28 +216,29 @@ imageMode(CENTER);
 push();
 var offsetX = map(vol, 0, 1, -10, 100);
 var offsetX2 = map (vol, 0, 1, 50, 100);
-image(img, width / 2 + offsetX, height / 2, img.width, img.height);
-image(img1, width / 2 + offsetX2 + 100, height / 2, img1.width, img1.height);
+image(img, width / 2 + offsetX, height / 2, width, height);
+image(img1, width / 2 + offsetX2-50 + width/10, height / 2, width, height);
 pop();
 angle += 2;}}
 
 // Appearing in the screen every sec
 imageMode(CENTER);
-push();
 
 //img
+push();
 for (let i = 0; i < imgCopies.length; i++) {
 imgCopies[i].scale += 0.1;
 if (imgCopies[i].scale > 1) {
 imgCopies[i].scale = 1;}
-image(imgCopies[i].img, imgCopies[i].x, imgCopies[i].y, imgCopies[i].img.width * imgCopies[i].scale, imgCopies[i].img.height * imgCopies[i].scale);}
-
+image(imgCopies[i].img, imgCopies[i].x, imgCopies[i].y, width * imgCopies[i].scale, height * imgCopies[i].scale);}
+pop();
 //img1
+push();
 for (let i = 0; i < img1Copies.length; i++) {
-img1Copies[i].scale += 0.5;
-if (img1Copies[i].scale > 1.2) {
+img1Copies[i].scale += 0.6;
+if (img1Copies[i].scale >1.1) {
 img1Copies[i].scale = 1;}
-image(img1Copies[i].img, img1Copies[i].x+150, img1Copies[i].y, img1Copies[i].img.width * img1Copies[i].scale, img1Copies[i].img.height * img1Copies[i].scale);}
+image(img1Copies[i].img, img1Copies[i].x+100, img1Copies[i].y, width * img1Copies[i].scale, height * img1Copies[i].scale);}
 pop();
 }
 
@@ -240,7 +249,7 @@ this.x = random(width);
 this.y = random(height);
 this.vx = random(-2, 2);
 this.vy = random(-2, 2);
-this.size = random(2, 5);}
+this.size = random(height/100, height/50);}
   
 update(spectrum) {
 this.x += this.vx;
