@@ -21,6 +21,13 @@ let emergencyTimeout = null;
 let angle = 0;
 let showText = true;
 
+//OPTIONAL
+//Making duplicate of images and arrays to be able to store the position
+let imgCopies = [];
+let img1Copies = [];
+let lastTime = 0;
+
+
 //Preload function is established
 function preload() {
 song1 = loadSound('sound/heartsound1.mp3');
@@ -112,11 +119,11 @@ showText = false;});
 // Drawing function established
 function draw() {
 
-
+//Interactive message
 if (showText) {
 fill(0);
 textSize(32);
-text("Please type your heart rate value and click submit", width / 2 - 300, height-100);}
+text("Please type your heart rate value and click submit", width / 2 - 350, height-100);}
 
 // Input box and button
 inputBox.show();
@@ -139,7 +146,15 @@ window.location.reload();}
 else {for (var i = 0; i < particles.length; i++) {
 particles[i].update(fft.analyze());
 particles[i].display(fft.analyze(), heartRate);}
-        
+
+
+//OPTIONAL
+// Setting up millis to make image copies to appear in the screen
+if (millis() - lastTime > 500) {
+lastTime = millis();
+imgCopies.push({x: width/2, y: height/2, img: img, scale: 0.1});
+img1Copies.push({x: width/2, y: height/2, img: img1, scale: 0.1});}
+
 // Draw img4 with rotation and animation
 imageMode(CENTER);
 push();
@@ -148,19 +163,21 @@ rotate(radians(angle));
 var img4Size = map(amp, 0, 1, 50, 200);
 image(img4, 0, 0, img4Size, img4Size);
 pop();
-        
+
 // Draw other images
 image(img5, width / 2, height / 2, img1.width, img1.height);
 image(img2, width / 2, height / 2, img1.width, img1.height);
 image(img3, width / 2, height / 2, img1.width, img1.height);
-        
+
+//Little rectangle to show the levels
 vol = amp.getLevel();
 var spectrum = fft.analyze();
 fill(255, 0, 0);
 noStroke();
-rect(10, 10, vol * 100, 20);
+rect(10, 10, vol * 300, 20);
         
 //pixels representation
+//img
 img.loadPixels();
 for (var i = 0; i < img.pixels.length; i += 15) {
 var rIndex = i;
@@ -173,6 +190,7 @@ img.pixels[gIndex] = map(spectrum[(freqIndex + 10) % spectrum.length], 0, 255, 0
 img.pixels[bIndex] = map(spectrum[(freqIndex + 20) % spectrum.length], 0, 255, 0, 255);}
 img.updatePixels();
 
+//img1
 img1.loadPixels();
 for (var i = 0; i < img1.pixels.length; i += 15) {
 var rIndex = i;
@@ -194,6 +212,25 @@ image(img, width / 2 + offsetX, height / 2, img.width, img.height);
 image(img1, width / 2 + offsetX2 + 100, height / 2, img1.width, img1.height);
 pop();
 angle += 2;}}
+
+// Appearing in the screen every sec
+imageMode(CENTER);
+push();
+
+//img
+for (let i = 0; i < imgCopies.length; i++) {
+imgCopies[i].scale += 0.1;
+if (imgCopies[i].scale > 1) {
+imgCopies[i].scale = 1;}
+image(imgCopies[i].img, imgCopies[i].x, imgCopies[i].y, imgCopies[i].img.width * imgCopies[i].scale, imgCopies[i].img.height * imgCopies[i].scale);}
+
+//img1
+for (let i = 0; i < img1Copies.length; i++) {
+img1Copies[i].scale += 0.5;
+if (img1Copies[i].scale > 1.2) {
+img1Copies[i].scale = 1;}
+image(img1Copies[i].img, img1Copies[i].x+150, img1Copies[i].y, img1Copies[i].img.width * img1Copies[i].scale, img1Copies[i].img.height * img1Copies[i].scale);}
+pop();
 }
 
 // Constructor established and working
@@ -219,5 +256,5 @@ display(spectrum, heartRate) {
 fill(map(random(spectrum.length), 0, 255, 0, 255), map(random(spectrum.length), 0, 255, 0, 255),
 map(random(spectrum.length), 0, 255, 0, 255));
 noStroke();
-ellipse(this.x, this.y, this.size * heartRate /20);}
+ellipse(this.x, this.y, this.size * heartRate /10);}
 }
