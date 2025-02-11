@@ -71,6 +71,7 @@ if (started) {
 currentSong.stop();}
 started = true;
 angle = 0;
+
 if (heartRate < 60 || heartRate > 180) {
 showEmergencyMessage = true;
 if (emergencyTimeout !== null) {
@@ -82,21 +83,23 @@ if (emergencyTimeout !== null) {
 clearTimeout(emergencyTimeout);}
 if (heartRate >= 60 && heartRate < 75) {
 currentSong = song1;}
-else if (heartRate >= 76 && heartRate < 90) {
+else if (heartRate >= 75 && heartRate < 89) {
 currentSong = song2;} 
-else if (heartRate >= 91 && heartRate < 105) {
+else if (heartRate >= 90 && heartRate < 104) {
 currentSong = song3;}
-else if (heartRate >= 106 && heartRate < 120) {
+else if (heartRate >= 105 && heartRate < 119) {
 currentSong = song4;}
-else if (heartRate >= 121 && heartRate < 135) {
+else if (heartRate >= 120 && heartRate < 134) {
 currentSong = song5;}
-else if (heartRate >= 136 && heartRate < 150) {
+else if (heartRate >= 135 && heartRate < 149) {
 currentSong = song6;}
-else if (heartRate >= 151 && heartRate < 165) {
+else if (heartRate >= 150 && heartRate < 164) {
 currentSong = song7;}
-else if (heartRate >= 166 && heartRate < 180) {
+else if (heartRate >= 165 && heartRate < 180) {
 currentSong = song8;}
 currentSong.play();}
+
+
 for (var i = 0; i < particles.length; i++) {
 particles[i].x = random(width);
 particles[i].y = random(height);
@@ -108,14 +111,12 @@ showText = false;});
 
 // Drawing function established
 function draw() {
-background (0);
 
 
-    
 if (showText) {
-fill(255);
+fill(0);
 textSize(32);
-text("Please type your heart rate value and click submit", width / 2 - 300, height/2);}
+text("Please type your heart rate value and click submit", width / 2 - 300, height-100);}
 
 // Input box and button
 inputBox.show();
@@ -170,10 +171,9 @@ var freqIndex = floor(map(i, 0, img.pixels.length, 0, spectrum.length));
 img.pixels[rIndex] = map(spectrum[freqIndex % spectrum.length], 0, 255, 0, 255);
 img.pixels[gIndex] = map(spectrum[(freqIndex + 10) % spectrum.length], 0, 255, 0, 255);
 img.pixels[bIndex] = map(spectrum[(freqIndex + 20) % spectrum.length], 0, 255, 0, 255);}
-
 img.updatePixels();
-img1.loadPixels();
 
+img1.loadPixels();
 for (var i = 0; i < img1.pixels.length; i += 15) {
 var rIndex = i;
 var gIndex = i + 1;
@@ -183,7 +183,6 @@ var freqIndex = floor(map(i, 0, img1.pixels.length, 0, spectrum.length));
 img1.pixels[rIndex] = map(spectrum[freqIndex % spectrum.length], 0, 255, 0, 255);
 img1.pixels[gIndex] = map(spectrum[(freqIndex + 10) % spectrum.length], 0, 255, 0, 255);
 img1.pixels[bIndex] = map(spectrum[(freqIndex + 20) % spectrum.length], 0, 255, 0, 255);}
-
 img1.updatePixels();
 
 // Moving the two singers
