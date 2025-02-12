@@ -13,13 +13,11 @@
   
 - The idea is to be able to retrieve human feelings (emotions), including reaction data, and use it to modify my paintings.
   
-- In this work, I will allow people to participate in my drawing by typing a value (Heart rate). 
-  
-- So, at the end of this work, I hope It will not only be my feelings being expressed with ink on paper but also society's emotions transforming my feelings (paintings) to reflect what they feel.
-  
-- This work is based on a painting from the artist and implements Javascript, HTML, and CSS language to modify this painting by inputting data that the observer types.
+- This work is based on a painting from the artist and implements Javascript, HTML, and CSS language to modify this painting by inputting data (heart rate values) that the observer types.
   
 - The artwork is an engaging audio-visual result that shows image transformation by sound data and input value.
+
+- So, at the end of this work, I hope It will not only be my feelings being expressed with ink on paper but also society's emotions transforming my feelings (paintings) to reflect what they feel.
 
 ## Summary/Problem-solving
 
