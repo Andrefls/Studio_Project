@@ -102,6 +102,8 @@ function draw() {
 
 - [play()](https://p5js.org/reference/p5.SoundFile/play/) Start the sound file.
 
+- [boolean()](https://p5js.org/reference/p5/boolean/) converts values to true or false.
+
 - Luckily enough, these concepts are not too strange for me as I do remember seeing all these concepts in my sound class while I was studying visual arts; the thing was, I did not know I could use them here and how to use them here, but this example shows it perfectly, and the trials I am going to experiment will allow me to learn it.
 
 - To clarify, some tweaks were necessary; I downloaded a random frog image from Google and a random song from my library and attached it to it.
@@ -134,31 +136,27 @@ amp = new p5.Amplitude ();
 fft = new p5.FFT ();
 
 // Loop and playing the song 
-
 song.play ();
 song.loop ();}
 
+// developing drawing function
 function draw() {
 background(220);
 
 // Drawing the values I have retrieved from sound
-
 vol = amp.getLevel ();
 var spectrum = fft.analyze ();
 
 //This is how I map the frequency spectrum to Colour Values
-
 r = map (spectrum [20],0,255,64,234);
 g = map (spectrum [50], 0, 255, 64, 234);
 tint (r,g, 52);
 image (img, width/2-50, (height-100)-(vol*100), 100, 50);}
 
 // Using the mouse to execute movement
-
 function mousePressed (){
 
 // creating a conditional, isPlaying work in a way that returns the boolean
-
 if (song.isPlaying()){
 song.stop();
 background (255,0,0);} 
