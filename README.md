@@ -562,8 +562,8 @@ fill(map(random(spectrum.length), 0, 255, 0, 255), map(random(spectrum.length), 
 noStroke();
 ellipse(this.x, this.y, this.size);}}```
 ````
+<img width="1728" alt="Moving Particles" src="https://github.com/user-attachments/assets/d1c35869-e750-463d-8513-5388f26d45bf" />
 
-<img width="1728" alt="Moving Particles" src="https://github.com/user-attachments/assets/9749396a-c80d-4bc0-9615-6803630e4f60" />
 
 - What did I learn? Most concepts were evident at this stage, except I was missing a few things.
 
