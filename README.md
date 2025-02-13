@@ -564,15 +564,15 @@ ellipse(this.x, this.y, this.size);}}```
 
 - Let's take a look at those concepts:
 
-- Int  Converts a Boolean, String, or decimal Number to an integer.
+- [Int()](https://p5js.org/reference/p5/int/)  Converts a Boolean, String, or decimal Number to an integer.
 
-- String: A sequence of text characters. The String data type helps work with text.
+- [String](https://p5js.org/reference/p5/String/): A sequence of text characters. The String data type helps work with text.
 
-- parseInt function: converts its first argument to a string, parses that string, and then returns an integer or NaN.
+- [parseInt function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt): converts its first argument to a string, parses that string, and then returns an integer or NaN.
 
-- NaN, the return value will be the integer that is the first argument taken as a number in the specified radix. I understood here that if it is also not an integer, it could create a conditional to return a number.
+- [NaN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt), the return value will be the integer that is the first argument taken as a number in the specified radix. I understood here that if it is also not an integer, it could create a conditional to return a number.
 
-- Radix: In the context of p5.js, "radix" refers to the base of a number system used when parsing a string into a numerical value
+- [Radix](https://www.w3schools.com/jsref_parseint.asp#:~:text=The radix parameter is used,number to a decimal number.): In the context of p5.js, "radix" refers to the base of a number system used when parsing a string into a numerical value
 
 - So, I understood the concept but did not know how to use it. Once I understand the idea, I'll use Meta when I need it to show me samples I can understand and use in my code.
 
