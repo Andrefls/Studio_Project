@@ -163,7 +163,9 @@ background (0,255,0);}
 }```
 ````
 
-- FROG IMAGE - EXAMPLE SCREENSHOT
+- FROG IMAGE (This image was randomly screenshotted from google and added to my code to start working)
+<img width="1400" alt="1" src="https://github.com/user-attachments/assets/7b995c3a-d099-4b2e-b091-6643bc990eef" />
+
 
 - At this stage, I had the frog moving up and down by the sound. However, I do not know precisely what makes the frog move. I need to be able to alter those values. So, I needed to represent the frequencies.
 
@@ -228,9 +230,16 @@ bri = 100;}```
 
 - After reading, I could follow an example in the link attached to create this visual effect, which I did. All the extracts on the following code were taken from this page and added to my code.
 
+- <img width="1522" alt="Trting to draw frequency" src="https://github.com/user-attachments/assets/25bb35b4-e1c4-4a5a-9418-27ccf403ec9c" />
+
+
 - I did my code, but it was missing a few touches, so I also asked Meta for an example so I could combine it all. In fact, from now on, I will investigate, analyse, try to do it, and then ask Meta to help me with concepts. Its codes are complex and sometimes incorrect, but if you ask for ideas or examples, you can understand and follow them and improve yours.
 
-- PICTURE 1, 2, 3, 4
+- META SAMPLES
+<img width="347" alt="1e1" src="https://github.com/user-attachments/assets/7e98a977-cfe0-4f58-a65e-4ad2e22496d4" />
+<img width="345" alt="1e4" src="https://github.com/user-attachments/assets/af5dfde0-a6de-438e-9100-60c5ffb29cf7" />
+<img width="348" alt="1e3" src="https://github.com/user-attachments/assets/60469f7f-063c-4a85-9d15-c4fe90868d51" />
+<img width="346" alt="1e2" src="https://github.com/user-attachments/assets/d33622a2-07b2-43ee-b501-ae1067fe6ff0" />
 
 - The result of reading, understanding, and seeing examples gave me the following: at this point, I have a good starting point for my visual goal. From now on, I start adding and tweak the class samples I did in my workshops to modify that frequency representation to what I want. Particles will represent light in the scenery and modify by frequencies.
 
@@ -304,7 +313,8 @@ background(0, 255, 0);}
 }```
 ````
 
-- IMAGE FROG WITH FREQUENCIES
+- <img width="1417" alt="FROG WITH FREQUENCIES" src="https://github.com/user-attachments/assets/c2d76961-3901-4d3a-8162-97fd33234af0" />
+
 
 - Now, I have the frequencies on the screen and the frog moving, but this is not my artistic idea. I need those ideas to merge.
 
@@ -407,11 +417,12 @@ background(0, 255, 0);}
 }```
 ````
 
-- IMAGE FROG MOVING BUT TINT
+- <img width="1415" alt="FROG WITH TINT" src="https://github.com/user-attachments/assets/41d47101-88e3-4051-abb2-4a88023d045a" />
+
 
 - Here, I noticed that the frequency only changed the RGB values, affecting the tint, but it was not what I wanted. I want the image transform to modify its pixels, so I looked for one of the samples I have done previously to achieve this.
  
-- I went to Workshop 3 and copied the code related to index colour to extract pixel references and build an array that would also work with the particles.
+- I went to [Workshop3](https://github.com/Andrefls/Workshop-task-3) and copied the code related to index colour to extract pixel references and build an array that would also work with the particles.
 
 ```for (let y = 0; y < img2.height; y++){
 for (let x = 0; x < img2.width; x++){
@@ -429,9 +440,14 @@ img2.pixels [newIndex + 1] = img2.pixels [index+1];
 img2.pixels [newIndex + 2] = img2.pixels [index +2];```
 ````
 
-- To clarify, this previous workshop3 did have the help of META in some places, so this code is part of an earlier help from the AI technology.
+- <img width="1423" alt="MOVING USING FREQUENCIES" src="https://github.com/user-attachments/assets/0fc43eda-bb33-4b86-8a6e-1a24d587ff87" />
+
+- To clarify, this previous [workshop3](https://github.com/Andrefls/Workshop-task-3) did have the help of META in some places, so this code is part of an earlier help from the AI technology.
 
 - I also added a Constructor Class example from one of our class examples. This clearly will use the frequency and the index colour of pixels and represent them in particles (geometric shape ellipse).
+
+- <img width="1596" alt="particles not moving" src="https://github.com/user-attachments/assets/19e2af5e-d96c-4f1e-9ced-ab0e4a52c0c9" />
+
 
 - I did everything possible, but the ellipses were not moving or changing. Here, it was frustrating. I thought I was missing something. I saw an example on this page that showed that I was missing updating the particles, but to be honest, I followed. I modified my code, but it still did not work; maybe at this stage, my brain was putting too many challenges, and It got shut, so I asked Meta to give me an example to clarify everything I read, but based on my code.
 
@@ -451,7 +467,14 @@ if (this.position.y > height) {this.position.y = 0;}
 this.diameter = map(someLevel, 0, 1, 0, 200) * this.scale;}```
 ````
 
-- META EXAMPLE 2 IMAGES
+- META SAMPLES
+
+<img width="350" alt="2e5" src="https://github.com/user-attachments/assets/12391cbf-e09a-46f0-9982-f41bdd9aff43" />
+<img width="344" alt="2e4" src="https://github.com/user-attachments/assets/8073fa6f-e421-4bb0-b815-7956ba2027f0" />
+<img width="343" alt="2e3" src="https://github.com/user-attachments/assets/e1d3a45e-3167-4cb6-b19f-ef526e2368a2" />
+<img width="345" alt="2e2" src="https://github.com/user-attachments/assets/5c0d1cfd-2d5b-4210-bf21-96a32d4ddbd4" />
+<img width="345" alt="2e1" src="https://github.com/user-attachments/assets/28db44c2-cdb0-4f9c-a87e-93a4dd2abb0d" />
+
   
 - Result: Moving Particles by Frequency
 
@@ -540,6 +563,8 @@ noStroke();
 ellipse(this.x, this.y, this.size);}}```
 ````
 
+<img width="1728" alt="Moving Particles" src="https://github.com/user-attachments/assets/9749396a-c80d-4bc0-9615-6803630e4f60" />
+
 - What did I learn? Most concepts were evident at this stage, except I was missing a few things.
 
 - I needed to learn that to make the particles move, I needed them to change the position, create a variable, an array that will store the previous position and update it to a new one based on the frequency values.
@@ -574,14 +599,16 @@ ellipse(this.x, this.y, this.size);}}```
 
 - [Radix](https://www.w3schools.com/jsref_parseint.asp#:~:text=): In the context of p5.js, "radix" refers to the base of a number system used when parsing a string into a numerical value
 
-- META IMAGES EXAMPLE 3
+- META SAMPLES
+<img width="347" alt="3e3" src="https://github.com/user-attachments/assets/bb19a96b-3fb7-4348-8247-48c6029d5a24" />
+<img width="345" alt="3e2" src="https://github.com/user-attachments/assets/c86799e6-9158-4e59-8976-63aef90af8bf" />
+<img width="649" alt="3e1" src="https://github.com/user-attachments/assets/a15e5156-1222-47dc-a560-cc75ac140912" />
 
 - After a few hours of frustration, I got to combine the concepts and examples, and finally, I got a code.
 
 - The Result: A code with interactivity, retrieving data and acting on it.
 
 - This code is also using offset to move the image by sound values. (Trial)
-
 
 ```
 // ADDING INTERACTIVE BUTTON (NOT WORKING FULLY BUT GOOD ENOUGH FOR NOW)
@@ -723,6 +750,8 @@ noStroke();
 ellipse(this.x, this.y, this.size * heartRate / 4);}}```
 ````
 
+<img width="1600" alt="Screenshot 2025-02-03 at 10 55 59 am" src="https://github.com/user-attachments/assets/3d1fea89-97c2-4254-ac0a-4433eb2d10b6" />
+
 - From here, I needed to add conditionals to make everything work smoothly; for example, I set some Timeout for a few messages if conditionals were not met.
 
 - I got the idea to rotate an image
@@ -768,19 +797,30 @@ catch(e) {
 
 - [window.location.reload](https://www.w3schools.com/jsref/met_loc_reload.asp): The reload() method does the same as the reload button in your browser.
 
+- Here I replace frog for one of my images, So the work look like this.
+
+- <img width="1597" alt="Screenshot 2025-02-03 at 11 53 00 am" src="https://github.com/user-attachments/assets/0a56d34c-ea6f-48af-a656-bd42d6555906" />
+
 - After understanding this concept, I asked Meta to show me an example of a function using this concept and my previous code.
 
-- META SAMPLE 4 (IMAGES)
+- META SAMPLE 4
+<img width="346" alt="4e2" src="https://github.com/user-attachments/assets/3294ec6e-e5e8-4de8-bf9c-6304b55e5904" />
+<img width="346" alt="4e1" src="https://github.com/user-attachments/assets/dc161897-a1ea-43f6-81b2-d94e53b6f5ec" />
 
 - I combined concepts, examples, and meta-samples to create my function. The examples helped me understand what I was doing, and after a couple of trials, I got it to work.
 
 - This code has the images attached; I only duplicated things to add my new images to complete the painting. I also added functions like rotating one of the images and some tweaks.
+
+- <img width="1602" alt="images attached" src="https://github.com/user-attachments/assets/2af4867d-92ec-4edc-8a8f-749bdf81e5d7" />
+
 
 - From now on, it will be related to editing the sounds, replacing the files and doing the same for the images.
 
 - If you read through this file, you will find that one trial of scale function didn't work out very well.
 
 - So I tried again. I duplicated the images using imgcopies and then applied the scale to them. Of course, I have to create an array and variable to work with it, but at this stage I knew how to do that.
+
+<img width="1598" alt="Rotating at the back" src="https://github.com/user-attachments/assets/64b7934b-ec0c-4436-9efb-2c6d5bb21ecd" />
 
 - The result: A code that is almost done. It's a basic code that needs tweaks on values depending on new images and real sounds but it works. 
 
