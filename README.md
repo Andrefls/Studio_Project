@@ -1090,6 +1090,29 @@ map(random(spectrum.length), 0, 255, 0, 255));
 noStroke();
 ellipse(this.x, this.y, this.size * heartRate /10);}}```
 ````
+- - - - - - - - - - - - - - - - - - -
+- My final step was to be able to work on the images.
+
+- So, I took my original painting and started modifying it using Photoshop. Add colours and transparencies and separate them into layers so they don't get affected by the code.
+
+- <img width="1310" alt="Singer_byAFLS_Lapicerism" src="https://github.com/user-attachments/assets/19ccdd5c-78fc-43c9-9d3c-65f7913fd503" />
+<img width="1467" alt="Screenshot 2025-02-10 at 6 19 44 pm" src="https://github.com/user-attachments/assets/ef40780d-cec4-41a9-b836-ea845fd18bec" />
+
+- Secondly, I downloaded a heart rate-based [audio](https://www.soundjay.com/heartbeat-sound-effect.html) to start the sound editing.
+
+- I change the speed of the sound, add songs, and alter the songs, creating noise frequencies and rhythm using Radiohead band songs. (To be clear,
+
+<img width="1728" alt="Mixing sounds" src="https://github.com/user-attachments/assets/149af8f0-d047-48df-869c-9d5856d59711" />
+
+- I use RADIOHEAD BAND SONG (few seconds from each song) I do not own any right to those songs) Only this is for educational use in a university project.
+
+- After that, I added to my code and started modifying values until I was happy with what was happening on the screen.
+
+<img width="1680" alt="Tweeking" src="https://github.com/user-attachments/assets/81bed860-dbcb-4e05-ab45-f96728251879" />
+
+- Finally I got something I like so... (Final code is at Sketch File on this Github)
+
+- <img width="1679" alt="Final WORK" src="https://github.com/user-attachments/assets/c3eba7df-46f1-4cae-af64-557aa4a104da" />
 
 
 ## Future development
@@ -1098,7 +1121,7 @@ ellipse(this.x, this.y, this.size * heartRate /10);}}```
 
 ## Conclusion
 
-NO YET
-
+The idea behind this was to create visual artwork that changes the input data of the observer. That data reflects the heartbeat attached to the observer's emotions when inputting the data. The rate is variable, as perhaps the person inputting the data just finished exercising or has been lying down all day, so this will be represented similarly.
+So, this work shows what I wanted to show: that art depends on how you feel.
 
 
