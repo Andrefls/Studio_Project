@@ -723,23 +723,335 @@ noStroke();
 ellipse(this.x, this.y, this.size * heartRate / 4);}}```
 ````
 
+- From here, I needed to add conditionals to make everything work smoothly; for example, I set some Timeout for a few messages if conditionals were not met.
+
+- I got the idea to rotate an image
+
+- Also, fixing the position of elements
+
+- Conditionals for the sound and text messages
+
+- Tweak the size of particles and make sure they are retrieving data.
+
+- Also, I need to add all the sound and all the actual images. (At this point, images and sound will need editing work, but that will be the last stage after I finish the complete code.
+
+- by doing this, I explore and apply a few concepts to my code to make a few things I want possible.
+
+- I found a [link](https://stackoverflow.com/questions/16309628/using-window-settimeout-and-window-setinterval-in-this-situation) on the internet. This link shows a way to use setInterval and setTimeout to reload a chart, so it could be helpful to apply to what I wanted: reload the page after the conditional was not met. The person also created a conditional using this symbol !==, which I must read about.
+
+[- Example 5](https://stackoverflow.com/questions/16309628/using-window-settimeout-and-window-setinterval-in-this-situation)
+
+```// updates all active charts
+function updateCharts() {
+var now = new Date().getTime();
+for (var i = 0; i < charts.length; i++) {
+var chart = charts[i];
+if (chart.nextUpdateTime !== null && chart.nextUpdateTime < now) {
+chart.nextUpdateTime = null; // chart.update() will re-set this
+try {chart.update(chart);} 
+catch(e) {
+ // handle the error}}}```
+````
+
+- For SeTimeout and SetInterval, I found this [video](https://www.youtube.com/watch?v=nGfTjA8qNDA) (Awesome video) to see how they work, as I need them to be able to set the timing of some messages.
+
+- [This](https://editor.p5js.org/enickles/sketches/oV2VImKje#:~:text=There are different ways to,of time measured in milliseconds) explains very well what is the function of this symbol. Flip a boolean variable the opposite way.
+
+- rotate(). Rotates the coordinate system.
+
+- setTimeout(): execute a function after waiting a certain amount of time measured in milliseconds
+
+- setInterval() method calls a function at specified intervals (milliseconds).
+- The setInterval() method continues calling the function until clearInterval() is called or the window is closed
+
+- !== no equal to: check that the value on the left is not equal to the one on the right. In my case, it checks if a timeout has a value that is not null.
+
+- window.location.reload: The reload() method does the same as the reload button in your browser.
+
+- After understanding this concept, I asked Meta to show me an example of a function using this concept and my previous code.
+
+- META SAMPLE 4 (IMAGES)
+
+- I combined concepts, examples, and meta-samples to create my function. The examples helped me understand what I was doing, and after a couple of trials, I got it to work.
+
+- This code has the images attached; I only duplicated things to add my new images to complete the painting. I also added functions like rotating one of the images and some tweaks.
+
+- From now on, it will be related to editing the sounds, replacing the files and doing the same for the images.
+
+- If you read through this file, you will find that one trial of scale function didn't work out very well.
+
+- So I tried again. I duplicated the images using imgcopies and then applied the scale to them. Of course, I have to create an array and variable to work with it, but at this stage I knew how to do that.
+
+- The result: A code that is almost done. It's a basic code that needs tweaks on values depending on new images and real sounds but it works. 
+
+```
+// Variables are established
+let song1, song2, song3, song4, song5, song6, song7, song8;
+let vol;
+let amp;
+let fft;
+let img, img1, img2, img3, img4, img5;
+let particles = [];
+let started = false;
+let heartRate = 1;
+let inputBox;
+let submitButton;
+let currentSong;
+let showEmergencyMessage = false;
+let emergencyTimeout = null;
+let angle = 0;
+let showText = true;
+
+//Duplicating images and arrays to be able to store the position
+let imgCopies = [];
+let img1Copies = [];
+let lastTime = 0;
+
+
+//Preload function is established
+function preload() {
+song1 = loadSound('sound/heartsound1.mp3');
+song2 = loadSound('sound/heartsound2.mp3');
+song3 = loadSound('sound/heartsound3.mp3');
+song4 = loadSound('sound/heartsound4.mp3');
+song5 = loadSound('sound/heartsound5.mp3');
+song6 = loadSound('sound/heartsound6.mp3');
+song7 = loadSound('sound/heartsound7.mp3');
+song8 = loadSound('sound/heartsound8.mp3');
+img = loadImage('images/singer2.png');
+img1 = loadImage('images/monster2.png');
+img2 = loadImage('images/rightm.png');
+img3 = loadImage('images/leftm.png');
+img4 = loadImage('images/musicnotes.png');
+img5 = loadImage('images/floor2.png');
+}
+
+
+// Resize Size of screen
+function windowResized (){
+resizeCanvas (windowWidth, windowHeight);
+inputBox.position(width/2-100, height-80);
+inputBox.size(100, 20);
+submitButton.position(width/2+10, height-78);
+submitButton.size(100, 20);}
+
+//function setup is established
+function setup() {
+createCanvas (windowWidth, windowHeight);
+
+// Particles array and data retrieval established
+amp = new p5.Amplitude();
+fft = new p5.FFT();
+for (var i = 0; i < 500; i++) {
+particles.push(new Particle());}
+
+//Input box established
+inputBox = createInput('');
+inputBox.position(width/2-100, height-80);
+inputBox.size(100, 20);
+
+//submitButton established
+submitButton = createButton('Submit');
+submitButton.position(width/2+10, height-78);
+submitButton.size(100, 20);
+
+// mousepressed established
+// sound playing as desired
+// conditional for text to dissapear established
+submitButton.mousePressed(() => {
+heartRate = parseInt(inputBox.value());
+if (isNaN(heartRate)) {
+heartRate = 1;}
+if (started) {
+currentSong.stop();}
+started = true;
+angle = 0;
+
+//Heart rate values and conditionals
+if (heartRate < 60 || heartRate > 180) {
+showEmergencyMessage = true;
+if (emergencyTimeout !== null) {
+clearTimeout(emergencyTimeout);}
+emergencyTimeout = setTimeout(() => {
+window.location.reload();}, 2000);}
+else {showEmergencyMessage = false;
+if (emergencyTimeout !== null) {
+clearTimeout(emergencyTimeout);}
+if (heartRate >= 60 && heartRate < 75) {
+currentSong = song1;}
+else if (heartRate >= 75 && heartRate < 89) {
+currentSong = song2;} 
+else if (heartRate >= 90 && heartRate < 104) {
+currentSong = song3;}
+else if (heartRate >= 105 && heartRate < 119) {
+currentSong = song4;}
+else if (heartRate >= 120 && heartRate < 134) {
+currentSong = song5;}
+else if (heartRate >= 135 && heartRate < 149) {
+currentSong = song6;}
+else if (heartRate >= 150 && heartRate < 164) {
+currentSong = song7;}
+else if (heartRate >= 165 && heartRate < 180) {
+currentSong = song8;}
+currentSong.play();}
+
+//particles set up array and representation
+for (var i = 0; i < particles.length; i++) {
+particles[i].x = random(width);
+particles[i].y = random(height);
+particles[i].vx = random(-2, 2);
+particles[i].vy = random(-2, 2);
+particles[i].size = random(2, 5);}
+showText = false;});}
+
+// DRAW FUNCTION ESTABLISHED
+function draw() {
+
+//Interactive message
+if (showText) {
+fill(0);
+textSize(32);
+text("Please type your heart rate value and click submit", width / 2 - 350, height-100);}
+
+// Input box and button
+inputBox.show();
+submitButton.show();
+
+//Emergency Message
+if (showEmergencyMessage) {
+fill(255, 0, 0);
+textSize(32);
+text("Call Emergency", width / 2 - 150, height / 2);
+angle = 0;
+if (currentSong) {
+currentSong.stop();}
+return;}
+
+// Draw particles   
+if (started) {
+if (currentSong && !currentSong.isPlaying()) {
+window.location.reload();} 
+else {for (var i = 0; i < particles.length; i++) {
+particles[i].update(fft.analyze());
+particles[i].display(fft.analyze(), heartRate);}
 
 
 
+// Setting up millis to make image copies to appear in the screen
+if (millis() - lastTime > 500) {
+lastTime = millis();
+imgCopies.push({x: width/2, y: height/2, img: img, scale: 0.1});
+img1Copies.push({x: width/2, y: height/2, img: img1, scale: 0.1});}
 
+// Draw img4 with rotation and animation
+imageMode(CENTER);
+push();
+translate(width / 2, height / 2);
+rotate(radians(angle));
+var img4Size = map(amp, 0, 1, 50, 200);
+image(img4, 0, 0, img4Size, img4Size);
+pop();
 
+// Draw other images
+image(img5, width / 2, height / 2, width, height);
+image(img2, width / 2, height / 2, width, height);
+image(img3, width / 2, height / 2, width, height);
 
+//Little rectangle to show the levels
+vol = amp.getLevel();
+var spectrum = fft.analyze();
+fill(255, 0, 0);
+noStroke();
+rect(10, 10, vol * width/5, height/20);
+        
+//pixels representation
+//img
+img.loadPixels();
+for (var i = 0; i < img.pixels.length; i += 15) {
+var rIndex = i;
+var gIndex = i + 1;
+var bIndex = i + 2;
+var aIndex = i + 3;
+var freqIndex = floor(map(i, 0, img.pixels.length, 0, spectrum.length));
+img.pixels[rIndex] = map(spectrum[freqIndex % spectrum.length], 0, 255, 0, 255);
+img.pixels[gIndex] = map(spectrum[(freqIndex + 10) % spectrum.length], 0, 255, 0, 255);
+img.pixels[bIndex] = map(spectrum[(freqIndex + 20) % spectrum.length], 0, 255, 0, 255);}
+img.updatePixels();
 
+//img1
+img1.loadPixels();
+for (var i = 0; i < img1.pixels.length; i += 15) {
+var rIndex = i;
+var gIndex = i + 1;
+var bIndex = i + 2;
+var aIndex = i + 3;
+var freqIndex = floor(map(i, 0, img1.pixels.length, 0, spectrum.length));
+img1.pixels[rIndex] = map(spectrum[freqIndex % spectrum.length], 0, 255, 0, 255);
+img1.pixels[gIndex] = map(spectrum[(freqIndex + 10) % spectrum.length], 0, 255, 0, 255);
+img1.pixels[bIndex] = map(spectrum[(freqIndex + 20) % spectrum.length], 0, 255, 0, 255);}
+img1.updatePixels();
 
+// Moving the two singers
+imageMode(CENTER);
+push();
+var offsetX = map(vol, 0, 1, -10, 100);
+var offsetX2 = map (vol, 0, 1, 50, 100);
+image(img, width / 2 + offsetX, height / 2, width, height);
+image(img1, width / 2 + offsetX2-50 + width/10, height / 2, width, height);
+pop();
+angle += 2;}}
 
+// Appearing on the screen every sec
+imageMode(CENTER);
 
+//img
+push();
+for (let i = 0; i < imgCopies.length; i++) {
+imgCopies[i].scale += 0.1;
+if (imgCopies[i].scale > 1) {
+imgCopies[i].scale = 1;}
+image(imgCopies[i].img, imgCopies[i].x, imgCopies[i].y, width * imgCopies[i].scale, height * imgCopies[i].scale);}
+pop();
+//img1
+push();
+for (let i = 0; i < img1Copies.length; i++) {
+img1Copies[i].scale += 0.6;
+if (img1Copies[i].scale >1.1) {
+img1Copies[i].scale = 1;}
+image(img1Copies[i].img, img1Copies[i].x+150, img1Copies[i].y, width * img1Copies[i].scale, height * img1Copies[i].scale);}
+pop();
+}
 
+// Constructor established and working
+class Particle {
+constructor() {
+this.x = random(width);
+this.y = random(height);
+this.vx = random(-2, 2);
+this.vy = random(-2, 2);
+this.size = random(height/100, height/50);}
+  
+update(spectrum) {
+this.x += this.vx;
+this.y += this.vy;
+if (this.x < 0 || this.x > width) {
+this.vx *= -1;}
+if (this.y < 0 || this.y > height) {
+this.vy *= -1;}
+this.size = map(spectrum[floor(random(spectrum.length))], 0, 255, 2, 5);}
 
+// heart rate display in particles working
+display(spectrum, heartRate) {
+fill(map(random(spectrum.length), 0, 255, 0, 255), map(random(spectrum.length), 0, 255, 0, 255),
+map(random(spectrum.length), 0, 255, 0, 255));
+noStroke();
+ellipse(this.x, this.y, this.size * heartRate /10);}}```
+````
 
 
 ## Future development
 
-- In the future, that will be retrieved using technology, such as heart rate retrieval devices that connect to the code and act on the drawing.
+- In the future, I will try to retrieve data using technology, such as heart rate retrieval devices. This devices will connect to the code and act on the drawing live.
 
 ## Conclusion
 
