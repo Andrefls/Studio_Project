@@ -224,7 +224,7 @@ bri = 100;}```
 
 - [Analyze](https://p5js.org/reference/p5.FFT/analyze/) : Returns the frequency spectrum of the input signal.
 
-- [Spectrum]([url](https://nishanc.medium.com/audio-visualization-in-javascript-with-p5-js-cf3bc7f1be07)): In p5.js, a spectrum can refer to a visualisation of audio data, such as a spectrogram or an irisgram. p5.js is a JavaScript library that allows users to create interactive visuals through web browsing.
+- [Spectrum]([url](https://nishanc.medium.com/audio-visualization-in-javascript-with-p5-js-cf3bc7f1be07)): In p5.js, a spectrum can refer to a visualisation of audio data, such as a spectrogram or an irisgram.
 
 - [map()](https://p5js.org/reference/p5/map/) Re-maps a number from one range to another
 
