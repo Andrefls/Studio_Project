@@ -550,6 +550,182 @@ ellipse(this.x, this.y, this.size);}}```
 
 - I also include random movement of particles as I want them to represent light.
 
+- Here, I have the frog moving; I will need to tidy up the movement, like constraining it to only the X-axis or choosing between a random movement or A to B. However, the movement is working. I do not need to worry now; I will replace the images, and they will tell me if I need to do that.
+
+- Now, I have talked about interactivity, but I haven't applied it yet. Well, I have everything starting depending on a mouse-pressed function, but as I mentioned before, I want a way for people to input the data. How do I do that?
+
+- Well, it's not too difficult; I only need to apply one of the examples from class and my workshops, where we create a submit button and an input data box.
+
+- So, I used my [workshop6]([url](https://github.com/Andrefls/Workshop-task-6/blob/main/sketch.js)) to extract the input box and button code.
+
+- However, a problem arises here. If I put an input box and tell people to put heart rate data, they could use a decimal number or a word that can't be converted into an integer. I want to ensure this data is an integer (exact number); if not, convert it into it. I went to ask Google to help me find a p5js function to convert decimals to integers.
+
+- I found this [site](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt), read through it, and understood a bit. First, it was clear that I was right; I need my code to be able to work and not crash, so I do need this to work out. I learnt a few concepts here.
+
+- Let's take a look at those concepts:
+
+- Int  Converts a Boolean, String, or decimal Number to an integer.
+
+- String: A sequence of text characters. The String data type helps work with text.
+
+- parseInt function: converts its first argument to a string, parses that string, and then returns an integer or NaN.
+
+- NaN, the return value will be the integer that is the first argument taken as a number in the specified radix. I understood here that if it is also not an integer, it could create a conditional to return a number.
+
+- Radix: In the context of p5.js, "radix" refers to the base of a number system used when parsing a string into a numerical value
+
+- So, I understood the concept but did not know how to use it. Once I understand the idea, I'll use Meta when I need it to show me samples I can understand and use in my code.
+
+- META IMAGES EXAMPLE 3
+
+- After a few hours of frustration, I got to combine the concepts and examples, and finally, I got a code.
+
+- The Result: A code with interactivity, retrieving data and acting on it.
+
+- This code is also using offset to move the image by sound values. (Trial)
+
+
+```
+// ADDING INTERACTIVE BUTTON (NOT WORKING FULLY BUT GOOD ENOUGH FOR NOW)
+// CREATING NEW VARIABLES AS I AM DOING START WITH THE SUBMIT BUTTON
+// CREATING INPUX BOX AND ADDING TEXT
+
+let song;
+let vol;
+let amp;
+let fft;
+let img;
+let particles = [];
+let started = false;
+let heartRate = 1; 
+let inputBox;
+let submitButton;
+
+function preload() {
+song = loadSound('sound/climbing.mp3');
+img = loadImage('images/frog.png');}
+
+function setup() {
+createCanvas(1500, 1000);
+  
+// setting up definitions to retrieve data
+amp = new p5.Amplitude();
+fft = new p5.FFT();
+  
+//Setup up an array of particles here to be able to use it later
+for (var i = 0; i < 500; i++) {
+particles.push(new Particle());}
+  
+// Setting input box as class example
+inputBox = createInput('');
+inputBox.position(650, 1010);
+inputBox.size(100, 30);
+  
+//Setting up the submit button as per the class example
+
+submitButton = createButton('Submit');
+submitButton.position(760, 1012);
+submitButton.size(100, 30);
+  
+ // Submit Button
+ // Creating statement
+ // Using something new called parseInt, which retrieves values and converts them to integers (numbers)
+ // Using something new, called isNaN, to check if the value is not a number converted to value 1.
+ // Also, an Array for the particles to move randomly
+ // Expecting to work after the submit button
+ // Set velocity on the particles for the movement (vx,vy)
+ 
+submitButton.mousePressed(() => {
+heartRate = parseInt(inputBox.value());
+if (isNaN(heartRate)) {
+heartRate = 1;}
+if (started) {song.stop();}
+started = true;
+song.play();
+song.loop();
+for (var i = 0; i < particles.length; i++) {
+particles[i].x = random(width);
+particles[i].y = random(height);
+particles[i].vx = random(-2, 2);
+particles[i].vy = random(-2, 2);
+particles[i].size = random(2, 5);}});}
+
+function draw() {
+background(0);
+// Drawing the values I have retrieved from sound
+//Including conditionals
+if (started) {
+vol = amp.getLevel();
+var spectrum = fft.analyze();
+
+ // Drawing amplitude
+ fill(255, 0, 0);
+ noStroke();
+ rect(10, 10, vol * 100, 20);
+    
+ // Drawing frequency
+ // Creating an spectrum array that loop
+ img.loadPixels();
+ for (var i = 0; i < img.pixels.length; i += 4) {
+ var rIndex = i;
+ var gIndex = i + 1;
+ var bIndex = i + 2;
+var aIndex = i + 3;
+
+//The map() function converts a value from one range to another.
+var freqIndex = floor(map(i, 0, img.pixels.length, 0, spectrum.length));
+       
+//This is how I map the frequency spectrum to Colour Values
+img.pixels[rIndex] = map(spectrum[freqIndex % spectrum.length], 0, 255, 0, 255);
+img.pixels[gIndex] = map(spectrum[(freqIndex + 10) % spectrum.length], 0, 255, 0, 255);
+img.pixels[bIndex] = map(spectrum[(freqIndex + 20) % spectrum.length], 0, 255, 0, 255);}
+img.updatePixels();
+      
+// Draw particles and array loop (Using spectrum)
+for (var i = 0; i < particles.length; i++) {
+particles[i].update(spectrum);
+particles[i].display(spectrum, heartRate);}
+    
+// Draw the image and offset it on X to create a movement effect
+// Using Vol frequency for movement
+// I think I am becoming crazy
+// Adding indication text
+
+imageMode(CENTER);
+push();
+var offsetX = map(vol, 0, 1, -100, 100);
+image(img, width / 2 + offsetX, height / 2, img.width, img.height);
+pop();} 
+else {
+fill(255);
+textSize(32);
+text("Please type your heart rate value and click submit", width / 2 - 300, height / 2);}}
+
+// Creating constructor and defining particles
+class Particle {
+constructor() {
+this.x = random(width);
+this.y = random(height);
+this.vx = random(-2, 2);
+this.vy = random(-2, 2);
+this.size = random(2, 5);}
+  
+update(spectrum) {
+this.x += this.vx;
+this.y += this.vy;
+if (this.x < 0 || this.x > width) {
+this.vx *= -1;}
+if (this.y < 0 || this.y > height) {this.vy *= -1;}
+this.size = map(spectrum[floor(random(spectrum.length))], 0, 255, 2, 5);}
+
+// How I will show the particles using the spectrum
+display(spectrum, heartRate) {
+fill(map(random(spectrum.length), 0, 255, 0, 255), map(random(spectrum.length), 0, 255, 0, 255), map(random(spectrum.length), 0, 255, 0, 255));
+noStroke();
+ellipse(this.x, this.y, this.size * heartRate / 4);}}```
+````
+
+
 
 
 
