@@ -755,18 +755,18 @@ catch(e) {
 
 - For SeTimeout and SetInterval, I found this [video](https://www.youtube.com/watch?v=nGfTjA8qNDA) (Awesome video) to see how they work, as I need them to be able to set the timing of some messages.
 
-- [This](https://editor.p5js.org/enickles/sketches/oV2VImKje#:~:text=There are different ways to,of time measured in milliseconds) explains very well what is the function of this symbol. Flip a boolean variable the opposite way.
+- [This](https://editor.p5js.org/enickles/sketches/oV2VImKje#:~:text=) explains very well what is the function of this symbol. Flip a boolean variable the opposite way.
 
-- rotate(). Rotates the coordinate system.
+- [rotate()](https://p5js.org/reference/p5/rotate/). Rotates the coordinate system.
 
-- setTimeout(): execute a function after waiting a certain amount of time measured in milliseconds
+- [setTimeout()](https://www.w3schools.com/jsref/met_win_settimeout.asp): execute a function after waiting a certain amount of time measured in milliseconds
 
-- setInterval() method calls a function at specified intervals (milliseconds).
+- [setInterval()](https://www.w3schools.com/jsref/met_win_setinterval.asp) method calls a function at specified intervals (milliseconds).
 - The setInterval() method continues calling the function until clearInterval() is called or the window is closed
 
-- !== no equal to: check that the value on the left is not equal to the one on the right. In my case, it checks if a timeout has a value that is not null.
+- [!==](https://editor.p5js.org/enickles/sketches/oV2VImKje#:~:text=There are different ways to,of time measured in milliseconds) no equal to: check that the value on the left is not equal to the one on the right. In my case, it checks if a timeout has a value that is not null.
 
-- window.location.reload: The reload() method does the same as the reload button in your browser.
+- [window.location.reload](https://www.w3schools.com/jsref/met_loc_reload.asp): The reload() method does the same as the reload button in your browser.
 
 - After understanding this concept, I asked Meta to show me an example of a function using this concept and my previous code.
 
