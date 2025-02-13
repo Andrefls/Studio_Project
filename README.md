@@ -237,9 +237,11 @@ bri = 100;}```
 
 - META SAMPLES
 <img width="347" alt="1e1" src="https://github.com/user-attachments/assets/7e98a977-cfe0-4f58-a65e-4ad2e22496d4" />
-<img width="345" alt="1e4" src="https://github.com/user-attachments/assets/af5dfde0-a6de-438e-9100-60c5ffb29cf7" />
-<img width="348" alt="1e3" src="https://github.com/user-attachments/assets/60469f7f-063c-4a85-9d15-c4fe90868d51" />
 <img width="346" alt="1e2" src="https://github.com/user-attachments/assets/d33622a2-07b2-43ee-b501-ae1067fe6ff0" />
+<img width="348" alt="1e3" src="https://github.com/user-attachments/assets/60469f7f-063c-4a85-9d15-c4fe90868d51" />
+<img width="345" alt="1e4" src="https://github.com/user-attachments/assets/af5dfde0-a6de-438e-9100-60c5ffb29cf7" />
+
+
 
 - The result of reading, understanding, and seeing examples gave me the following: at this point, I have a good starting point for my visual goal. From now on, I start adding and tweak the class samples I did in my workshops to modify that frequency representation to what I want. Particles will represent light in the scenery and modify by frequencies.
 
@@ -468,14 +470,12 @@ this.diameter = map(someLevel, 0, 1, 0, 200) * this.scale;}```
 ````
 
 - META SAMPLES
-
-<img width="350" alt="2e5" src="https://github.com/user-attachments/assets/12391cbf-e09a-46f0-9982-f41bdd9aff43" />
-<img width="344" alt="2e4" src="https://github.com/user-attachments/assets/8073fa6f-e421-4bb0-b815-7956ba2027f0" />
-<img width="343" alt="2e3" src="https://github.com/user-attachments/assets/e1d3a45e-3167-4cb6-b19f-ef526e2368a2" />
-<img width="345" alt="2e2" src="https://github.com/user-attachments/assets/5c0d1cfd-2d5b-4210-bf21-96a32d4ddbd4" />
 <img width="345" alt="2e1" src="https://github.com/user-attachments/assets/28db44c2-cdb0-4f9c-a87e-93a4dd2abb0d" />
+<img width="345" alt="2e2" src="https://github.com/user-attachments/assets/5c0d1cfd-2d5b-4210-bf21-96a32d4ddbd4" />
+<img width="343" alt="2e3" src="https://github.com/user-attachments/assets/e1d3a45e-3167-4cb6-b19f-ef526e2368a2" />
+<img width="344" alt="2e4" src="https://github.com/user-attachments/assets/8073fa6f-e421-4bb0-b815-7956ba2027f0" />
+<img width="350" alt="2e5" src="https://github.com/user-attachments/assets/12391cbf-e09a-46f0-9982-f41bdd9aff43" />
 
-  
 - Result: Moving Particles by Frequency
 
 ```var song;
@@ -600,9 +600,10 @@ ellipse(this.x, this.y, this.size);}}```
 - [Radix](https://www.w3schools.com/jsref_parseint.asp#:~:text=): In the context of p5.js, "radix" refers to the base of a number system used when parsing a string into a numerical value
 
 - META SAMPLES
-<img width="347" alt="3e3" src="https://github.com/user-attachments/assets/bb19a96b-3fb7-4348-8247-48c6029d5a24" />
-<img width="345" alt="3e2" src="https://github.com/user-attachments/assets/c86799e6-9158-4e59-8976-63aef90af8bf" />
+
 <img width="649" alt="3e1" src="https://github.com/user-attachments/assets/a15e5156-1222-47dc-a560-cc75ac140912" />
+<img width="345" alt="3e2" src="https://github.com/user-attachments/assets/c86799e6-9158-4e59-8976-63aef90af8bf" />
+<img width="347" alt="3e3" src="https://github.com/user-attachments/assets/bb19a96b-3fb7-4348-8247-48c6029d5a24" />
 
 - After a few hours of frustration, I got to combine the concepts and examples, and finally, I got a code.
 
@@ -804,8 +805,10 @@ catch(e) {
 - After understanding this concept, I asked Meta to show me an example of a function using this concept and my previous code.
 
 - META SAMPLE 4
-<img width="346" alt="4e2" src="https://github.com/user-attachments/assets/3294ec6e-e5e8-4de8-bf9c-6304b55e5904" />
+
 <img width="346" alt="4e1" src="https://github.com/user-attachments/assets/dc161897-a1ea-43f6-81b2-d94e53b6f5ec" />
+<img width="346" alt="4e2" src="https://github.com/user-attachments/assets/3294ec6e-e5e8-4de8-bf9c-6304b55e5904" />
+
 
 - I combined concepts, examples, and meta-samples to create my function. The examples helped me understand what I was doing, and after a couple of trials, I got it to work.
 
