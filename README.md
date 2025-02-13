@@ -572,7 +572,7 @@ ellipse(this.x, this.y, this.size);}}```
 
 - [NaN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt), the return value will be the integer that is the first argument taken as a number in the specified radix. I understood here that if it is also not an integer, it could create a conditional to return a number.
 
-- [Radix](https://www.w3schools.com/jsref_parseint.asp#:~:text=The radix parameter is used,number to a decimal number): In the context of p5.js, "radix" refers to the base of a number system used when parsing a string into a numerical value
+- [Radix](https://www.w3schools.com/jsref_parseint.asp#:~:text=): In the context of p5.js, "radix" refers to the base of a number system used when parsing a string into a numerical value
 
 - META IMAGES EXAMPLE 3
 
