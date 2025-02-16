@@ -235,7 +235,8 @@ bri = 100;}```
 
 - I did my code, but it was missing a few touches, so I also asked Meta for an example so I could combine it all. In fact, from now on, I will investigate, analyse, try to do it, and then ask Meta to help me with concepts. Its codes are complex and sometimes incorrect, but if you ask for ideas or examples, you can understand and follow them and improve yours.
 
-- META SAMPLES
+- Meta AI Acknowledgement 1
+
 <img width="347" alt="1e1" src="https://github.com/user-attachments/assets/7e98a977-cfe0-4f58-a65e-4ad2e22496d4" />
 <img width="346" alt="1e2" src="https://github.com/user-attachments/assets/d33622a2-07b2-43ee-b501-ae1067fe6ff0" />
 <img width="348" alt="1e3" src="https://github.com/user-attachments/assets/60469f7f-063c-4a85-9d15-c4fe90868d51" />
@@ -469,7 +470,8 @@ if (this.position.y > height) {this.position.y = 0;}
 this.diameter = map(someLevel, 0, 1, 0, 200) * this.scale;}```
 ````
 
-- META SAMPLES
+- Meta AI Acknowledgement 2
+
 <img width="345" alt="2e1" src="https://github.com/user-attachments/assets/28db44c2-cdb0-4f9c-a87e-93a4dd2abb0d" />
 <img width="345" alt="2e2" src="https://github.com/user-attachments/assets/5c0d1cfd-2d5b-4210-bf21-96a32d4ddbd4" />
 <img width="343" alt="2e3" src="https://github.com/user-attachments/assets/e1d3a45e-3167-4cb6-b19f-ef526e2368a2" />
@@ -599,7 +601,7 @@ ellipse(this.x, this.y, this.size);}}```
 
 - [Radix](https://www.w3schools.com/jsref_parseint.asp#:~:text=): In the context of p5.js, "radix" refers to the base of a number system used when parsing a string into a numerical value
 
-- META SAMPLES
+- Meta AI Acknowledgement 3
 
 <img width="649" alt="3e1" src="https://github.com/user-attachments/assets/a15e5156-1222-47dc-a560-cc75ac140912" />
 <img width="345" alt="3e2" src="https://github.com/user-attachments/assets/c86799e6-9158-4e59-8976-63aef90af8bf" />
@@ -804,7 +806,7 @@ catch(e) {
 
 - After understanding this concept, I asked Meta to show me an example of a function using this concept and my previous code.
 
-- META SAMPLE 4
+- Meta AI Acknowledgement 4
 
 <img width="346" alt="4e1" src="https://github.com/user-attachments/assets/dc161897-a1ea-43f6-81b2-d94e53b6f5ec" />
 <img width="346" alt="4e2" src="https://github.com/user-attachments/assets/3294ec6e-e5e8-4de8-bf9c-6304b55e5904" />
