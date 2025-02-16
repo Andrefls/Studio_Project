@@ -796,7 +796,7 @@ catch(e) {
 - [setInterval()](https://www.w3schools.com/jsref/met_win_setinterval.asp) method calls a function at specified intervals (milliseconds).
 - The setInterval() method continues calling the function until clearInterval() is called or the window is closed
 
-- [!==](https://editor.p5js.org/enickles/sketches/oV2VImKje#:~:text=There are different ways to,of time measured in milliseconds) no equal to: check that the value on the left is not equal to the one on the right. In my case, it checks if a timeout has a value that is not null.
+- [!==](https://editor.p5js.org/enickles/sketches/oV2VImKje#:~:text=) no equal to: check that the value on the left is not equal to the one on the right. In my case, it checks if a timeout has a value that is not null.
 
 - [window.location.reload](https://www.w3schools.com/jsref/met_loc_reload.asp): The reload() method does the same as the reload button in your browser.
 
